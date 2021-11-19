@@ -1,30 +1,18 @@
 const express = require('express');
 const app = express();
 const expressLayouts = require('express-ejs-layouts');
-const port = 3000;
+const port = 8000;
+
+const post = require('./data.json');
 
 /**template using EJS */
 app.set('view engine', 'ejs');
 app.use(expressLayouts);
+/* ~ */
 
+app.use(express.static('public'));
 
-app.get('/', (req, res) => {
-    const data = {
-        nama: "wahyu Lamani",
-        umur: 21,
-        alamat: 'bailang lingkungan 6',
-        email: 'razorwahyu1@gmail.com'
-    }
-    // console.log(data);
-
-    res.render('home', {
-        title: 'halaman Home',
-        layout: 'layouts/core',
-        data: data
-    });
-});
-
-
+require('./router/home.route')(app)
 
 
 app.listen(port, () => {
