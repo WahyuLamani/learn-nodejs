@@ -5,5 +5,5 @@ const sqlize = new Sequelize(process.env.DB_NAME, process.env.DB_USERNAME, proce
     dialect: process.env.DB_CONNECTION
 });
 
-module.exports = { sqlize }
+module.exports = { sqlize, Sequelize }
 

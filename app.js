@@ -2,8 +2,11 @@ const express = require('express');
 const app = express();
 const expressLayouts = require('express-ejs-layouts');
 const port = 8000;
+const { sqlize } = require('./app/config/database.config');
+const morgan = require('morgan');
 
-const { sqlize } = require('./app/config/db.config');
+
+require('./app/config/morgan.config')(app, morgan)
 
 const dbConnect = async () => {
     try {
@@ -17,10 +20,10 @@ const dbConnect = async () => {
 /**template using EJS */
 app.set('view engine', 'ejs');
 app.use(expressLayouts);
-/* ~ */
 
 app.use(express.static('public'));
 
+/**Route */
 require('./router/home.route')(app)
 
 
