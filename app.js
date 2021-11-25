@@ -1,7 +1,7 @@
 const express = require('express');
 const app = express();
 const expressLayouts = require('express-ejs-layouts');
-const port = 8000;
+const port = 8001;
 const { sqlize } = require('./app/config/database.config');
 const morgan = require('morgan');
 
@@ -13,7 +13,7 @@ const dbConnect = async () => {
         await sqlize.authenticate()
         console.log('Database Connected !!');
     } catch (err) {
-        console.log('connection Failed !', err);
+        console.log('connection Failed ! \n', err);
     }
 }
 

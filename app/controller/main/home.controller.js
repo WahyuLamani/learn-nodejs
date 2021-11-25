@@ -14,7 +14,30 @@ exports.Home = (req, res) => {
 
     res.render('home', {
         layout,
+        active: '',
         title: 'halaman Home',
         data: data
     });
+}
+
+exports.About = (req, res) => {
+    res.render('about', {
+        layout,
+        active: 'about',
+        title: 'About'
+    })
+}
+exports.Apps = (req, res) => {
+    res.render('apps', {
+        layout,
+        active: 'apps',
+        title: 'Apps'
+    })
+}
+exports.Register = (req, res) => {
+    res.render('register', {
+        layout,
+        active: 'register',
+        title: 'Register'
+    })
 }
