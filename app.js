@@ -6,29 +6,34 @@ const { sqlize } = require('./app/config/database.config');
 const morgan = require('morgan');
 
 
-require('./app/config/morgan.config')(app, morgan)
+require('./app/config/morgan.config')(app, morgan);
 
-const dbConnect = async () => {
+//** connect to DB */
+(async () => {
     try {
         await sqlize.authenticate()
         console.log('Database Connected !!');
     } catch (err) {
         console.log('connection Failed ! \n', err);
     }
-}
+})();
 
-/**template using EJS */
+/** template using EJS */
 app.set('view engine', 'ejs');
 app.use(expressLayouts);
 
+/** define public folder */
 app.use(express.static('public'));
+
+/** bodyParser */
+app.use(express.json())
+app.use(express.urlencoded({ extended: true }))
 
 /**Route */
 require('./router/home.route')(app)
 
 
 app.listen(port, () => {
-    dbConnect()
     console.log(`app running port : http://localhost:${port}`);
 });
 
