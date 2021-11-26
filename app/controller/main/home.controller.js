@@ -1,9 +1,10 @@
 /* static Value */
 const layout = 'layouts/main';
-/* ~ */
+const bcrypt = require('bcrypt');
 
+const db = require('../../model');
 
-exports.Home = (req, res) => {
+exports.home = (req, res) => {
     const data = {
         nama: "wahyu Lamani",
         umur: 21,
@@ -20,24 +21,45 @@ exports.Home = (req, res) => {
     });
 }
 
-exports.About = (req, res) => {
+exports.about = (req, res) => {
     res.render('about', {
         layout,
         active: 'about',
         title: 'About'
     })
 }
-exports.Apps = (req, res) => {
+exports.apps = (req, res) => {
     res.render('apps', {
         layout,
         active: 'apps',
         title: 'Apps'
     })
 }
-exports.Register = (req, res) => {
+exports.register = (req, res) => {
     res.render('register', {
         layout,
         active: 'register',
         title: 'Register'
     })
+}
+
+exports.store = async (req, res, next) => {
+    const data = req.body;
+    if (data.password === data.repeatPassword) {
+        bcrypt.hash(data.password, 10, function (err, hash) {
+            db.user.create({
+                name: req.body.name,
+                email: req.body.email,
+                phone_number: req.body.phone_number,
+                password: hash
+            }).then(res.render('register', {
+                layout,
+                active: 'register',
+                title: 'Register'
+            }))
+        });
+    }
+
+
+
 }

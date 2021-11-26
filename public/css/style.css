@@ -160,6 +160,10 @@ nav {
     box-shadow: 1px 1px 5px #fff;
 }
 
+.form-signin .form-floating input {
+    font-weight: bold;
+}
+
 .form-signin .form-floating {
     color: #000;
 }
